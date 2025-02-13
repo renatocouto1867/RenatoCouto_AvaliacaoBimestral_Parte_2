@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">RenatoCouto_AvaliacaoBimestral_Parte_2</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">renato.couto@tudante.ifto.edu.br</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_sair">Sair</string>
+
+    <string name="titulo_App">Avaliação Bimestral</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_listar_pokemon">Listar Pokémon</string>
+    <string name="menu_settings">Configurações</string>
+    <string name="menu_jogar">Jogar</string>
+    <string name="url">Url</string>
+    <string name="erro_ao_baixar_dados">Erro ao Baixar dados</string>
+    <string name="carregando">Carregando...</string>
+    <string name="atualizar_lista_de_pokemon">Atualizar lista de Pokémon</string>
+    <string name="listar_api">Listar API</string>
+    <string name="baixar_api">Baixar dados API</string>
+    <string name="listar_banco">Listar Banco</string>
+    <string name="limpar_banco_de_dados">Limpar banco de dados</string>
+    <string name="limpar_banco">Limpar Banco</string>
+    <string name="salvar_pokemon">Salvar Pokémon</string>
+    <string name="personagens">Mostra o nome dos personagens selecionados</string>
+    <string name="salvar">Salvar</string>
+    <string name="gabarito">Gabarito</string>
+    <string name="nenhum_pokemon_encontrado">Nenhum Pokémon encontrado</string>
+    <string name="carregando_dados">Carregando dados</string>
+    <string name="lista_salva_com_sucesso">Lista salva com sucesso</string>
+    <string name="erro_ao_excluir">Erro ao excluir</string>
+    <string name="erro_ao_salvar_lista">Erro ao salvar a Lista</string>
+    <string name="erro_exite_lista">Você já salvou uma lista</string>
+    <string name="listas_excluida">Lista excluida</string>
+
+    <string name="confirmar_exclusao">Confirmar Exclusão</string>
+    <string name="realmente_deseja_deletar">"Você realmente deseja Limpar o banco de dados?"</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="confirma">Confirma</string>
+    <string name="erro_ao_deletar_registros">Erro ao deletar registros</string>
+    <string name="banco_vazio">Não existe nenhum registro no banco</string>
+    <string name="erro_ao_baixar_pok_mons">"Erro ao baixar Pokémons: "</string>
+    <string name="n_o_foi_poss_vel_obter_dados_dos_pok_mons">Não foi possível obter dados dos Pokémons</string>
+    <string name="jogar">Jogar</string>
+    <string name="erro_baixar_pokemons">Você não baixou os Pokémons. Vá no menu listar</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="inicia_o_jogo">Inicia o jogo</string>
+    <string name="numero_menor_que_2">Numero menor que 2</string>
+    <string name="numero_maior_que_50">Numero maior que 50</string>
+    <string name="campo_vazio">Campo vazio</string>
+    <string name="baixar_os_dados_primeiro">Clique em Baixar os dados da API, primeiro!</string>
+
+</resources>
