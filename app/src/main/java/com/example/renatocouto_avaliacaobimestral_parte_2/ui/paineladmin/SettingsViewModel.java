@@ -30,13 +30,13 @@ public class SettingsViewModel extends ViewModel {
         dadosRepository.obter50Pokemons(new DadosRepository.OnBaixarListener() {
             @Override
             public void sucesso(List<Result> results) {
-                List<Result> pokemonList = new ArrayList<>(results);
-                liveDataRecebido.postValue(new ArrayList<>(pokemonList));
+                liveDataRecebido.postValue(new ArrayList<>(results));
             }
 
             @Override
             public void erro(String erro) {
                 liveDataRecebido.postValue(new ArrayList<>());
+                liveDataMensagem.postValue(erro);
             }
         });
     }
@@ -54,12 +54,11 @@ public class SettingsViewModel extends ViewModel {
         dadosRepository.bancoGetAllResults(new DadosRepository.OnBaixarListener() {
             @Override
             public void sucesso(List<Result> results) {
-                List<Result> pokemonList = new ArrayList<>(results);
-                if (pokemonList.isEmpty()) {
-                    Log.e("tamanho lista Banco", "lista vazia");
+                if (results.isEmpty()) {
+                    Log.e("Banco de Dados", "Lista vazia");
                     liveDataRecebido.postValue(new ArrayList<>());
                 }
-                liveDataRecebido.postValue(new ArrayList<>(pokemonList));
+                liveDataRecebido.postValue(new ArrayList<>(results));
             }
 
             @Override
@@ -74,7 +73,7 @@ public class SettingsViewModel extends ViewModel {
             @Override
             public void sucesso(List<Result> results) {
                 List<Result> pokemonList = new ArrayList<>(results);
-                if (pokemonList.size()>0) {
+                if (pokemonList.size() > 0) {
                     liveDataMensagem.postValue("erro_existente");
                 } else if (pokemonList.isEmpty()) {
                     salvaLista(pokemons);
@@ -105,7 +104,7 @@ public class SettingsViewModel extends ViewModel {
         });
     }
 
-    public void limparBandoDados() {
+    public void limparBancoDados() {
         dadosRepository.bancoDeleteAll(new DadosRepository.OnDeleteAllListener() {
             @Override
             public void onSuccess(int registrosAfetados) {

@@ -93,7 +93,7 @@ public class SettingsFragment extends Fragment {
                 .setMessage(getString(R.string.realmente_deseja_deletar))
                 .setPositiveButton(getString(R.string.confirma), (dialog, which) -> {
                     //sim
-                    settingsViewModel.limparBandoDados();
+                    settingsViewModel.limparBancoDados();
                     listarRegistroBanco();
                     settingsViewModel.getMensagem().observe(getViewLifecycleOwner(), s -> {
                         if (s.equals("sucesso")) {
