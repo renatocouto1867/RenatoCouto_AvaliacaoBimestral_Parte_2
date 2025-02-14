@@ -8,7 +8,7 @@ import java.util.List;
 import javax.annotation.processing.Generated;
 
 @Generated("jsonschema2pojo")
-public class Pokemons {
+public class PokemonsBaixados {
 
     @SerializedName("count")
     @Expose

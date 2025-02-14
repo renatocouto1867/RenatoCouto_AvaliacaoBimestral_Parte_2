@@ -44,14 +44,12 @@
     <string name="n_o_foi_poss_vel_obter_dados_dos_pok_mons">Não foi possível obter dados dos Pokémons</string>
     <string name="jogar">Jogar</string>
     <string name="erro_baixar_pokemons">Você não baixou os Pokémons. Vá no menu listar</string>
-
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="inicia_o_jogo">Inicia o jogo</string>
     <string name="numero_menor_que_2">Numero menor que 2</string>
     <string name="numero_maior_que_50">Numero maior que 50</string>
+    <string name="numero_invalido">Numero inválido</string>
     <string name="campo_vazio">Campo vazio</string>
     <string name="baixar_os_dados_primeiro">Clique em Baixar os dados da API, primeiro!</string>
+    <string name="clique_gabarito">Clique em gabarito primeiro</string>
 
 </resources>

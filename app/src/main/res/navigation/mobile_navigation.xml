@@ -27,6 +27,12 @@
         android:name="com.example.renatocouto_avaliacaobimestral_parte_2.ui.paineladmin.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/nav_jogoFragment"
+        android:name="com.example.renatocouto_avaliacaobimestral_parte_2.ui.jogo.JogoFragment"
+        android:label="JogoFragment"
+        tools:layout="@layout/fragment_jogo"
+        />
 
 
 </navigation>

@@ -28,7 +28,7 @@ public class UsuarioViewModel extends ViewModel {
 
     public void listarAleatorioBanco(int qt) {
 
-        dadosRepository.bancoGetAleatroioResults(qt, new DadosRepository.OnBaixarListener() {
+        dadosRepository.bancoGetAleatorioResults(qt, new DadosRepository.OnBaixarListener() {
             @Override
             public void sucesso(List<Result> results) {
                 List<Result> pokemonList = new ArrayList<>(results);

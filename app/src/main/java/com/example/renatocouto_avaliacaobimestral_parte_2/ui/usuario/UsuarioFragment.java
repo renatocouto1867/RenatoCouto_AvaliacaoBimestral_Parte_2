@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,8 +52,7 @@ public class UsuarioFragment extends Fragment {
         observeLista();
         binding.buttonGabarito.setOnClickListener(v -> buscar());
 
-        // ainda desenvolvendo
-        //binding.buttonJogar.setOnClickListener(v-> iniciarJogo(resultList));
+        binding.buttonJogar.setOnClickListener(v -> iniciarJogo(resultList));
 
         return root;
     }
@@ -68,6 +69,9 @@ public class UsuarioFragment extends Fragment {
         } else if (qt == -2) {
             binding.editTextNumero.requestFocus();
             binding.editTextNumero.setError(getString(R.string.numero_maior_que_50));
+        } else if (qt == -7) {
+            binding.editTextNumero.requestFocus();
+            binding.editTextNumero.setError(getString(R.string.numero_invalido));
         } else if (qt >= 2 && qt <= 50) {
             usuarioViewModel.listarAleatorioBanco(qt);
         }
@@ -92,7 +96,7 @@ public class UsuarioFragment extends Fragment {
             int numero = Integer.parseInt(numeroStr);
             return checarNumero(numero);
         } catch (NumberFormatException e) {
-            return -7; //codigo para nota invalida
+            return -7; //codigo para numero invalida
         }
     }
 
@@ -100,7 +104,7 @@ public class UsuarioFragment extends Fragment {
         if (numero >= 2 && numero <= 50) {
             return numero;
         }
-        return numero < 2 ? -1 : -2; // -1 para nota negativa, -2 para acima do máximo
+        return numero < 2 ? -1 : -2; // -1 para numero negativo, -2 para acima do máximo
     }
 
     private void observeLista() {
@@ -118,16 +122,20 @@ public class UsuarioFragment extends Fragment {
         });
     }
 
-    public void iniciarJogo(List<Result> results){
-        Bundle result = new Bundle();
-        result.putSerializable("lista", (Serializable) results);
+    public void iniciarJogo(List<Result> results) {
+        if (results == null) {
+            Mensagens.showErro(getView(), getString(R.string.clique_gabarito));
+        } else {
 
-        JogoFragment jogoFragment= new JogoFragment();
-        jogoFragment.setArguments(result);
-        requireActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.nav_host_fragment_content_main, jogoFragment)
-                .addToBackStack(null)
-                .commit();
+            Bundle result = new Bundle();
+            result.putSerializable("lista", (Serializable) results);
+
+            JogoFragment jogoFragment = new JogoFragment();
+            jogoFragment.setArguments(result);
+
+            NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
+            navController.navigate(R.id.nav_jogoFragment, result);
+        }
     }
 
 

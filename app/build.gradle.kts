@@ -47,11 +47,14 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
-    implementation ("com.google.code.gson:gson:2.11.0")
+    implementation("com.google.code.gson:gson:2.11.0")
     implementation("com.google.android.gms:play-services-location:21.3.0")
 
-    implementation ("androidx.room:room-runtime:2.5.2")
-    annotationProcessor ("androidx.room:room-compiler:2.5.2")
+    implementation("androidx.room:room-runtime:2.5.2")
+    annotationProcessor("androidx.room:room-compiler:2.5.2")
+//    biblioteca para trabalhar com imagens
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 
 
 }

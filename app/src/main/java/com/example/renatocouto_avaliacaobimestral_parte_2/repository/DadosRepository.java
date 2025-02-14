@@ -6,10 +6,13 @@ import android.util.Log;
 
 import com.example.renatocouto_avaliacaobimestral_parte_2.ClienteHttp.Conexao;
 import com.example.renatocouto_avaliacaobimestral_parte_2.R;
-import com.example.renatocouto_avaliacaobimestral_parte_2.entity.Pokemons;
+import com.example.renatocouto_avaliacaobimestral_parte_2.entity.Pokemon;
+import com.example.renatocouto_avaliacaobimestral_parte_2.entity.PokemonsBaixados;
 import com.example.renatocouto_avaliacaobimestral_parte_2.entity.Result;
 import com.example.renatocouto_avaliacaobimestral_parte_2.util.Auxilia;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.InputStream;
@@ -26,7 +29,7 @@ public class DadosRepository {
     private final ResultDao resultDao;
     private final ExecutorService executorService;
     private final Context context;
-    private Pokemons dadosBaixados;
+    private PokemonsBaixados dadosBaixados;
 
     public DadosRepository(Application application) {
         AppDatabase database = AppDatabase.getDatabase(application);
@@ -38,7 +41,7 @@ public class DadosRepository {
     /**
      * Para Executar a requisição da API, deve ser executado em uma thread separada
      */
-    private Pokemons apiObterDados() {
+    private PokemonsBaixados apiObterDados() {
 
         if (dadosBaixados != null) {
             return dadosBaixados;
@@ -52,7 +55,7 @@ public class DadosRepository {
         Gson gson = new Gson();
 
         if (textoJSON != null) {
-            Type type = new TypeToken<Pokemons>() {
+            Type type = new TypeToken<PokemonsBaixados>() {
             }.getType();
             dadosBaixados = gson.fromJson(textoJSON, type);
             atualizaId();
@@ -77,7 +80,7 @@ public class DadosRepository {
     public void obter50Pokemons(OnBaixarListener listener) {
         executorService.execute(() -> {
             try {
-                Pokemons dados = apiObterDados();
+                PokemonsBaixados dados = apiObterDados();
 
                 if (dados != null && dados.getResults() != null) {
                     List<Result> todosResultados = dados.getResults();
@@ -159,7 +162,8 @@ public class DadosRepository {
         });
 
     }
-    public void bancoGetAleatroioResults(int qt, OnBaixarListener listener) {
+
+    public void bancoGetAleatorioResults(int qt, OnBaixarListener listener) {
         executorService.execute(() -> {
             try {
                 List<Result> results = resultDao.getAleatorioResults(qt);
@@ -211,6 +215,62 @@ public class DadosRepository {
         }
     }
 
+    /* https://docs.oracle.com/javaee/7/api/javax/json/JsonObject.html
+    tive que relembrar a materia de gerenciamento de dados para web
+    porque fazer a classe pojo para esse endPoint tava complicado...
+    muita coisa para apagar para conseguir o modelo.
+    aqui teve certeza que eu não conseguireia fazer durante a aula.
+     */
+
+    /**
+     * recebe o id do pokémon e retorna um objeto pokémon detalhado.
+     */
+    public void obterDetalhesPokemon(List<Result> resultList, OnPokemonDetalhadoListener listener) {
+        List<Pokemon> pokemonList = new ArrayList<>();
+
+        executorService.execute(() -> {
+            for (Result result : resultList) {
+                try {
+                    String url = "https://pokeapi.co/api/v2/pokemon/" + result.getId();
+                    Conexao conexao = new Conexao();
+                    InputStream inputStream = conexao.obterRespostaHTTP(url);
+                    Auxilia auxilia = new Auxilia();
+                    String json = auxilia.converter(inputStream);
+
+                    Gson gson = new Gson();
+                    JsonObject jsonObject = gson.fromJson(json, JsonObject.class);
+
+                    // pego a url da imagem navegando no objeto json
+                    String imagemUrl = jsonObject.getAsJsonObject("sprites")
+                            .getAsJsonObject("other")
+                            .getAsJsonObject("home")
+                            .getAsJsonPrimitive("front_default")
+                            .getAsString();
+
+                    // pego a primeira habilidade
+                    JsonArray habilidadesArray = jsonObject.getAsJsonArray("abilities");
+                    String habilidade = habilidadesArray.get(0).getAsJsonObject()
+                            .getAsJsonObject("ability")
+                            .getAsJsonPrimitive("name")
+                            .getAsString();
+
+                    Pokemon pokemon = new Pokemon(result.getId(), result.getName(), result.getUrl(), imagemUrl, habilidade);
+                    pokemonList.add(pokemon);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (!pokemonList.isEmpty()) {
+                listener.sucesso(pokemonList);
+            } else {
+                listener.erro("Erro ao obter detalhes dos Pokémons.");
+            }
+        });
+    }
+
+
     // Interfaces para fazer callback.
     // Achei melhor fazer com callback, mas vi que da para usar o LiviData
     // fiquei um pouco perdido com tanto LiviData, mas depois vi que era mais facil.
@@ -238,5 +298,12 @@ public class DadosRepository {
 
         void erro(String erro);
     }
+
+    public interface OnPokemonDetalhadoListener {
+        void sucesso(List<Pokemon> pokemons);
+
+        void erro(String erro);
+    }
+
 
 }
