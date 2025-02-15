@@ -21,7 +21,7 @@ public class UsuarioViewModelFactory implements ViewModelProvider.Factory {
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if (modelClass.isAssignableFrom(UsuarioViewModel.class)){
+        if (modelClass.isAssignableFrom(UsuarioViewModel.class)) {
             return (T) new UsuarioViewModel(repository);
         }
         throw new IllegalArgumentException("erro ao retornar a viewModel");

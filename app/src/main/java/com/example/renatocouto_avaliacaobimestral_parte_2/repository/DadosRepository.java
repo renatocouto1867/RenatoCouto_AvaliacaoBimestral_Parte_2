@@ -66,14 +66,6 @@ public class DadosRepository {
         }//if else
     }
 
-//    /**
-//     * Método público para obter todos os pokémons da API
-//     */
-//    private Pokemons obterPokemons() {
-//        Pokemons dados = apiObterDados();
-//        return dados;
-//    }
-
     /**
      * Método público para obter apenas os 50 primeiros Pokémons
      */

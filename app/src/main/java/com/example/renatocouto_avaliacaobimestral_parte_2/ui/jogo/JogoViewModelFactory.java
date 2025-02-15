@@ -18,15 +18,15 @@ public class JogoViewModelFactory implements ViewModelProvider.Factory {
     private final DadosRepository repository;
     private final List<Result> results;
 
-    public JogoViewModelFactory(DadosRepository repository,List<Result> results) {
+    public JogoViewModelFactory(DadosRepository repository, List<Result> results) {
         this.repository = repository;
-        this.results=results;
+        this.results = results;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if (modelClass.isAssignableFrom(JogoViewModel.class)){
+        if (modelClass.isAssignableFrom(JogoViewModel.class)) {
             return (T) new JogoViewModel(repository, results);
         }
         throw new IllegalArgumentException("erro ao retornar a viewModel");

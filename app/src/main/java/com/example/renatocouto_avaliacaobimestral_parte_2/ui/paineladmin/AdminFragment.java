@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.renatocouto_avaliacaobimestral_parte_2.R;
-import com.example.renatocouto_avaliacaobimestral_parte_2.databinding.FragmentSettingsBinding;
+import com.example.renatocouto_avaliacaobimestral_parte_2.databinding.FragmentAdminBinding;
 import com.example.renatocouto_avaliacaobimestral_parte_2.entity.Result;
 import com.example.renatocouto_avaliacaobimestral_parte_2.repository.DadosRepository;
 import com.example.renatocouto_avaliacaobimestral_parte_2.ui.listarpokemon.ItemListarPokemonAdapter;
@@ -22,10 +22,10 @@ import com.example.renatocouto_avaliacaobimestral_parte_2.util.Mensagens;
 
 import java.util.List;
 
-public class SettingsFragment extends Fragment {
+public class AdminFragment extends Fragment {
 
-    private FragmentSettingsBinding binding;
-    private SettingsViewModel settingsViewModel;
+    private FragmentAdminBinding binding;
+    private AdminViewModel adminViewModel;
     private List<Result> resultList;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -33,13 +33,13 @@ public class SettingsFragment extends Fragment {
 
         //para passar o objeto repositorio para a viewModel
         DadosRepository dadosRepository = new DadosRepository(requireActivity().getApplication());
-        SettingsViewModelFactory factory = new SettingsViewModelFactory(dadosRepository);
+        AdminViewModelFactory factory = new AdminViewModelFactory(dadosRepository);
 
         // aqui passo viewModelFactory ja com o viewModel com o repositorio
-        settingsViewModel = new ViewModelProvider(this, factory)
-                .get(SettingsViewModel.class);
+        adminViewModel = new ViewModelProvider(this, factory)
+                .get(AdminViewModel.class);
 
-        binding = FragmentSettingsBinding.inflate(inflater, container, false);
+        binding = FragmentAdminBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         exibeProgresso(true);
 
@@ -53,7 +53,7 @@ public class SettingsFragment extends Fragment {
     }
 
     private void observeLista() {
-        settingsViewModel.getPokemons().observe(getViewLifecycleOwner(), results -> {
+        adminViewModel.getPokemons().observe(getViewLifecycleOwner(), results -> {
             if (results != null) {
                 resultList = results;
                 if (resultList.isEmpty()) {
@@ -80,11 +80,11 @@ public class SettingsFragment extends Fragment {
     }
 
     private void listarApi() {
-        settingsViewModel.listar50Pokemons();
+        adminViewModel.listar50Pokemons();
     }
 
     private void listarRegistroBanco() {
-        settingsViewModel.listarBanco();
+        adminViewModel.listarBanco();
     }
 
     private void limparBandoDados() {
@@ -93,9 +93,9 @@ public class SettingsFragment extends Fragment {
                 .setMessage(getString(R.string.realmente_deseja_deletar))
                 .setPositiveButton(getString(R.string.confirma), (dialog, which) -> {
                     //sim
-                    settingsViewModel.limparBancoDados();
+                    adminViewModel.limparBancoDados();
                     listarRegistroBanco();
-                    settingsViewModel.getMensagem().observe(getViewLifecycleOwner(), s -> {
+                    adminViewModel.getMensagem().observe(getViewLifecycleOwner(), s -> {
                         if (s.equals("sucesso")) {
                             Mensagens.showAlerta(requireView(), getString(R.string.listas_excluida));
                         }
@@ -113,11 +113,11 @@ public class SettingsFragment extends Fragment {
     }
 
     private void salvarListaBanco() {
-        if (resultList.isEmpty()||resultList.size()==0){
-            Mensagens.showAlerta(requireView(),getString(R.string.baixar_os_dados_primeiro));
+        if (resultList.isEmpty() || resultList.size() == 0) {
+            Mensagens.showAlerta(requireView(), getString(R.string.baixar_os_dados_primeiro));
         }
-        settingsViewModel.salvarListaPokemons(resultList);
-        settingsViewModel.getMensagem().observe(getViewLifecycleOwner(), s -> {
+        adminViewModel.salvarListaPokemons(resultList);
+        adminViewModel.getMensagem().observe(getViewLifecycleOwner(), s -> {
             if (s.equals("sucesso")) {
                 Mensagens.showSucesso(requireView(), getString(R.string.lista_salva_com_sucesso));
             }

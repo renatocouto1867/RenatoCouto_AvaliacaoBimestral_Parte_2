@@ -17,7 +17,7 @@ public class ItemListarPersonagemSelecionadoAdapter extends RecyclerView.Adapter
 
     private final List<Result> results;
 
-    /**
+    /*
      * acrescentei a checagem de resultado nulo, para evitar um erro de NullPointerException
      */
     public ItemListarPersonagemSelecionadoAdapter(List<Result> results) {

@@ -1,12 +1,12 @@
 package com.example.renatocouto_avaliacaobimestral_parte_2.entity;
 
 public class Pokemon {
-    private int id;
-    private String name;
-    private String url;
-    private String imagemUrl;
-    private String habilidade;
-    private int pontos;
+    private final int id;
+    private final String name;
+    private final String url;
+    private final String imagemUrl;
+    private final String habilidade;
+    private final int pontos;
 
     public Pokemon(int id, String name, String url, String imagemUrl, String hablidade) {
         this.id = id;

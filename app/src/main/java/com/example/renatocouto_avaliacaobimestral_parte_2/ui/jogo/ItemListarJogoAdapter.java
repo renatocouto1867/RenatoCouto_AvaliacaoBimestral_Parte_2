@@ -1,7 +1,6 @@
 package com.example.renatocouto_avaliacaobimestral_parte_2.ui.jogo;
 
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,7 @@ import com.example.renatocouto_avaliacaobimestral_parte_2.entity.Pokemon;
 
 import java.util.Collections;
 import java.util.List;
+
 //<a href="https://www.flaticon.com/br/icones-gratis/erro" title="erro ícones">Erro ícones criados por Idealogo Studio - Flaticon</a>
 //<a href="https://www.flaticon.com/br/icones-gratis/upload-de-imagem" title="upload de imagem ícones">Upload de imagem ícones criados por JessHG - Flaticon</a>
 public class ItemListarJogoAdapter extends RecyclerView.Adapter<ItemListarJogoAdapter.ViewHolder> {

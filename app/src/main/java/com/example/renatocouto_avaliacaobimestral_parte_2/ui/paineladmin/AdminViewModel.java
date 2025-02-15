@@ -12,13 +12,13 @@ import com.example.renatocouto_avaliacaobimestral_parte_2.repository.DadosReposi
 import java.util.ArrayList;
 import java.util.List;
 
-public class SettingsViewModel extends ViewModel {
+public class AdminViewModel extends ViewModel {
 
     private final DadosRepository dadosRepository;
     private final MutableLiveData<List<Result>> liveDataRecebido;
     private final MutableLiveData<String> liveDataMensagem;
 
-    public SettingsViewModel(DadosRepository dadosRepository) {
+    public AdminViewModel(DadosRepository dadosRepository) {
         this.dadosRepository = dadosRepository;
         liveDataMensagem = new MutableLiveData<>();
         liveDataRecebido = new MutableLiveData<>();

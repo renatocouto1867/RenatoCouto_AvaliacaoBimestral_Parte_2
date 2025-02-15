@@ -1,10 +1,10 @@
 package com.example.renatocouto_avaliacaobimestral_parte_2.ui.jogo;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -27,6 +27,7 @@ public class JogoFragment extends Fragment {
     private JogoViewModel jogoViewModel;
     private List<Result> resultList;
     private List<Pokemon> pokemonList;
+    private String nome;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class JogoFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             resultList = (List<Result>) bundle.getSerializable("lista");
+            nome = bundle.getString("nome");
         }
     }
 
@@ -50,11 +52,14 @@ public class JogoFragment extends Fragment {
         binding = FragmentJogoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        exibeProgresso(false);
+
+        exibeProgresso(true);
 
         jogoViewModel.listaPokemons();
 
         observeViewModel();
+        binding.textNome.setText(nome);
+
 
         return root;
     }

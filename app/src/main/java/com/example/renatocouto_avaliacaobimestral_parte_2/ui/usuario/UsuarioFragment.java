@@ -128,7 +128,9 @@ public class UsuarioFragment extends Fragment {
         } else {
 
             Bundle result = new Bundle();
+            String nome = binding.editTextNome.getText().toString();
             result.putSerializable("lista", (Serializable) results);
+            result.putString("nome", nome);
 
             JogoFragment jogoFragment = new JogoFragment();
             jogoFragment.setArguments(result);

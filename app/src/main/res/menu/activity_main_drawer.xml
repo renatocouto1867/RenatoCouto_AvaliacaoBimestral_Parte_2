@@ -20,8 +20,8 @@
             android:title="@string/menu_jogar" />
 
         <item
-            android:id="@+id/nav_settings"
+            android:id="@+id/nav_admin"
             android:icon="@drawable/settings_24"
-            android:title="@string/menu_settings" />
+            android:title="@string/menu_admin" />
     </group>
 </menu>
